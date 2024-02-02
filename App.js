@@ -103,6 +103,7 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.header}>
         <NavBar />
+        <InfoCard />
       </View>
       <View style={styles.footer}>
         <View style={styles.transactions}>
@@ -132,10 +133,32 @@ export default function App() {
   );
 }
 
+const InfoCard = () => {
+  <View style={styles.infoCard}>
+    <Text>Total Balance</Text>
+    <View style={styles.balanceCard}>
+      <Text>KES</Text>
+      <Text style={styles.h1}>145,000</Text>
+    </View>
+
+    <Button title='Choose card' />
+  </View>;
+};
 const NavBar = () => {
   return (
     <View style={styles.nav}>
-      <Text>NavBar</Text>
+      <Icon
+        name='user-circle'
+        size={24}
+        color='green'
+        backgroundColor='#f8f8f8'
+        style={styles.avatar}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.userName}>Ebenezar Bukosia</Text>
+        <Text style={styles.greetings}>Good Afternoon Sir!</Text>
+      </View>
+      <Text style={styles.amount}>..</Text>
     </View>
   );
 };
@@ -160,6 +183,11 @@ const TransactionCard = ({ icon, companyName, date, amount }) => {
 };
 
 const styles = StyleSheet.create({
+  h1: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   container: {
     backgroundColor: 'white',
     height: '100%',
@@ -176,7 +204,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 35,
+  },
+  balanceCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'lightgray',
+    padding: 10,
+    borderRadius: 10,
+  },
+  infoCard: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   transactions: {
     height: '100%',
@@ -210,6 +250,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
+  avatar: {
+    width: 45,
+    padding: 10,
+    borderRadius: 50,
+    margin: 10,
+  },
   textContainer: {
     flex: 1,
   },
@@ -217,6 +263,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
   },
+  userName: {
+    fontWeight: 'bold',
+    color: '#ffff',
+    fontSize: 20,
+  },
+  greetings: {
+    color: '#f1f1f1',
+    fontSize: 15,
+    marginTop: 5,
+  },
+
   date: {
     color: '#666',
   },
