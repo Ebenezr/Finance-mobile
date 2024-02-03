@@ -1,5 +1,7 @@
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 export default function App() {
   const transactions = [
@@ -17,29 +19,29 @@ export default function App() {
     },
 
     {
-      icon: 'facebook',
-      companyName: 'Facebook Inc',
+      icon: 'free-code-camp',
+      companyName: 'FreeCodeCamp',
       date: '01/02/2024',
       amount: '$45',
     },
     {
-      icon: 'apple',
-      companyName: 'Apple Inc',
-      date: '12/12/2021',
-      amount: '$100',
+      icon: 'snapchat',
+      companyName: 'SnapChat',
+      date: '12/12/2023',
+      amount: '$1,005',
     },
     {
-      icon: 'google',
-      companyName: 'Google Inc',
-      date: '12/12/2021',
-      amount: '$784',
+      icon: 'microchip',
+      companyName: 'Trancent Inc',
+      date: '12/12/2023',
+      amount: '$7,845',
     },
 
     {
-      icon: 'facebook',
-      companyName: 'Facebook Inc',
-      date: '12/12/2021',
-      amount: '$100',
+      icon: 'themeisle',
+      companyName: 'Themeisle Inc',
+      date: '12/12/2023',
+      amount: '$1,400',
     },
     {
       icon: 'apple',
@@ -104,6 +106,7 @@ export default function App() {
       <View style={styles.header}>
         <NavBar />
         <InfoCard />
+        <MenuItems />
       </View>
       <View style={styles.footer}>
         <View style={styles.transactions}>
@@ -134,21 +137,24 @@ export default function App() {
 }
 
 const InfoCard = () => {
-  <View style={styles.infoCard}>
-    <Text>Total Balance</Text>
-    <View style={styles.balanceCard}>
-      <Text>KES</Text>
-      <Text style={styles.h1}>145,000</Text>
+  return (
+    <View style={styles.infoCard}>
+      <Text style={styles.h2}>Total Balance</Text>
+      <View style={styles.balanceCard}>
+        <Text style={styles.h1Disabled}>KES</Text>
+        <Text style={styles.h1}>145,000</Text>
+      </View>
+      <Pressable style={styles.button}>
+        <Text style={styles.buttonText}>Choose card</Text>
+      </Pressable>
     </View>
-
-    <Button title='Choose card' />
-  </View>;
+  );
 };
 const NavBar = () => {
   return (
     <View style={styles.nav}>
-      <Icon
-        name='user-circle'
+      <AntDesign
+        name='gitlab'
         size={24}
         color='green'
         backgroundColor='#f8f8f8'
@@ -158,7 +164,45 @@ const NavBar = () => {
         <Text style={styles.userName}>Ebenezar Bukosia</Text>
         <Text style={styles.greetings}>Good Afternoon Sir!</Text>
       </View>
-      <Text style={styles.amount}>..</Text>
+      <Entypo name='dots-two-horizontal' size={24} color='white' />
+    </View>
+  );
+};
+
+const menus = [
+  {
+    icon: 'upload',
+    title: 'Transfer',
+  },
+  {
+    icon: 'check',
+    title: 'Receive',
+  },
+  {
+    icon: 'plussquareo',
+    title: 'Top Up',
+  },
+  {
+    icon: 'appstore-o',
+    title: 'More',
+  },
+];
+
+const MenuItems = () => {
+  return (
+    <View style={styles.menuItemsWrapper}>
+      {menus.map((item) => (
+        <View style={styles.menuItem}>
+          <AntDesign
+            name={item.icon}
+            size={30}
+            color='white'
+            backgroundColor='#303030'
+            style={styles.menuIcon}
+          />
+          <Text style={styles.subText}>{item.title}</Text>
+        </View>
+      ))}
     </View>
   );
 };
@@ -166,7 +210,7 @@ const NavBar = () => {
 const TransactionCard = ({ icon, companyName, date, amount }) => {
   return (
     <View style={styles.transactionCard}>
-      <Icon
+      <FontAwesome
         name={icon}
         size={24}
         color='#FF9900'
@@ -183,10 +227,53 @@ const TransactionCard = ({ icon, companyName, date, amount }) => {
 };
 
 const styles = StyleSheet.create({
+  menuItemsWrapper: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+    paddingHorizontal: 30,
+  },
+  menuItem: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  button: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderStyle: 'solid',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    lineHeight: 20,
+    letterSpacing: 0.25,
+    fontWeight: 'bold',
+  },
   h1: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: 'bold',
     color: 'white',
+  },
+  h2: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'gray',
+  },
+  h1Disabled: {
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: 'gray',
   },
   container: {
     backgroundColor: 'white',
@@ -210,11 +297,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'lightgray',
     padding: 10,
     borderRadius: 10,
+    gap: 10,
   },
   infoCard: {
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -250,6 +338,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
+  menuIcon: {
+    width: 50,
+    height: 50,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
   avatar: {
     width: 45,
     padding: 10,
@@ -273,7 +369,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 5,
   },
-
   date: {
     color: '#666',
   },
