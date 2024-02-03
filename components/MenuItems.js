@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    backgroundColor: '#303030',
   },
   subText: {
     color: 'gray',
