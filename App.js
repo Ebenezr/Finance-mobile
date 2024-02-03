@@ -1,17 +1,27 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import Foundation from 'react-native-vector-icons/Foundation';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 export default function App() {
   const transactions = [
     {
+      id: 1,
       icon: 'apple',
       companyName: 'Apple Inc',
-      date: '01/01/2024',
+      date: '01/02/2024',
       amount: '$100',
     },
     {
+      id: 2,
       icon: 'google',
       companyName: 'Google Inc',
       date: '01/02/2024',
@@ -19,18 +29,21 @@ export default function App() {
     },
 
     {
-      icon: 'free-code-camp',
-      companyName: 'FreeCodeCamp',
+      id: 3,
+      icon: 'viadeo',
+      companyName: 'Viadeo Inc',
       date: '01/02/2024',
       amount: '$45',
     },
     {
+      id: 4,
       icon: 'snapchat',
       companyName: 'SnapChat',
       date: '12/12/2023',
       amount: '$1,005',
     },
     {
+      id: 5,
       icon: 'microchip',
       companyName: 'Trancent Inc',
       date: '12/12/2023',
@@ -38,64 +51,74 @@ export default function App() {
     },
 
     {
+      id: 6,
       icon: 'themeisle',
       companyName: 'Themeisle Inc',
       date: '12/12/2023',
       amount: '$1,400',
     },
     {
-      icon: 'apple',
-      companyName: 'Apple Inc',
-      date: '12/12/2021',
+      id: 7,
+      icon: 'snowflake-o',
+      companyName: 'Snowflake Inc',
+      date: '12/12/2023',
       amount: '$898',
     },
     {
-      icon: 'google',
-      companyName: 'Google Inc',
-      date: '12/12/2021',
+      id: 8,
+      icon: 'glide',
+      companyName: 'Glide Inc',
+      date: '12/12/2023',
       amount: '$100',
     },
 
     {
-      icon: 'facebook',
-      companyName: 'Facebook Inc',
-      date: '12/12/2021',
+      id: 9,
+      icon: 'imdb',
+      companyName: 'IMDB Inc',
+      date: '12/12/2023',
       amount: '$888',
     },
     {
+      id: 10,
       icon: 'apple',
       companyName: 'Apple Inc',
       date: '12/12/2021',
       amount: '$100',
     },
     {
-      icon: 'google',
-      companyName: 'Google Inc',
-      date: '12/12/2021',
+      id: 11,
+      icon: 'yoast',
+      companyName: 'Yoast Inc',
+      date: '12/12/2022',
       amount: '$189',
     },
 
     {
-      icon: 'facebook',
-      companyName: 'Facebook Inc',
-      date: '12/12/2021',
+      id: 12,
+      icon: 'first-order',
+      companyName: 'First Order Inc',
+      date: '12/12/2023',
       amount: '$99',
     },
     {
-      icon: 'apple',
-      companyName: 'Apple Inc',
-      date: '12/12/2021',
+      id: 13,
+      icon: 'podcast',
+      companyName: 'Podcast Inc',
+      date: '12/12/2023',
       amount: '$100',
     },
     {
-      icon: 'google',
-      companyName: 'Google Inc',
-      date: '12/12/2021',
-      amount: '$100',
+      id: 14,
+      icon: 'eercast',
+      companyName: 'Eercast Inc',
+      date: '12/12/2023',
+      amount: '$9,999',
     },
     {
-      icon: 'facebook',
-      companyName: 'Facebook Inc',
+      id: 15,
+      icon: 'telegram',
+      companyName: 'Telegram Inc',
       date: '12/12/2021',
       amount: '$250',
     },
@@ -117,25 +140,45 @@ export default function App() {
           </View>
           {/* list */}
           <View style={styles.transactionList}>
-            {transactions.map((transaction, index) => (
-              <View key={index}>
+            <FlatList
+              keyExtractor={(item) => item.id}
+              data={transactions}
+              renderItem={({ item }) => (
                 <TransactionCard
-                  key={index}
-                  icon={transaction.icon}
-                  companyName={transaction.companyName}
-                  date={transaction.date}
-                  amount={transaction.amount}
+                  icon={item.icon}
+                  companyName={item.companyName}
+                  date={item.date}
+                  amount={item.amount}
                 />
-                <View style={styles.divider}></View>
-              </View>
-            ))}
+              )}
+            />
           </View>
+          {/* bottom nav */}
         </View>
+        <BottomNav />
       </View>
     </View>
   );
 }
 
+const BottomNav = () => {
+  return (
+    <View style={styles.bottomNav}>
+      <View style={styles.bottomNavMenus}>
+        <MaterialCommunityIcons
+          name='home-variant-outline'
+          size={24}
+          color='black'
+        />
+        <AntDesign name='creditcard' size={24} color='black' />
+      </View>
+      <View style={styles.bottomNavMenus}>
+        <AntDesign name='user' size={24} color='black' />
+        <AntDesign name='setting' size={24} color='black' />
+      </View>
+    </View>
+  );
+};
 const InfoCard = () => {
   return (
     <View style={styles.infoCard}>
@@ -213,7 +256,7 @@ const TransactionCard = ({ icon, companyName, date, amount }) => {
       <FontAwesome
         name={icon}
         size={24}
-        color='#FF9900'
+        color='green'
         backgroundColor='#f8f8f8'
         style={styles.icon}
       />
@@ -227,6 +270,19 @@ const TransactionCard = ({ icon, companyName, date, amount }) => {
 };
 
 const styles = StyleSheet.create({
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#ffff',
+    padding: 20,
+  },
+  bottomNavMenus: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 30,
+  },
   menuItemsWrapper: {
     marginTop: 20,
     flexDirection: 'row',
@@ -276,7 +332,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#f8f8f8',
     height: '100%',
   },
   header: {
@@ -285,7 +341,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
-  footer: {},
+  footer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '45%',
+  },
   nav: {
     padding: 20,
     flexDirection: 'row',
@@ -307,8 +367,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   transactions: {
-    height: '100%',
-    padding: 20,
+    paddingTop: 15,
+    paddingHorizontal: 20,
   },
   headerText: {
     color: 'black',
@@ -325,6 +385,7 @@ const styles = StyleSheet.create({
   },
   transactionList: {
     marginTop: 20,
+    height: '70%',
   },
   transactionCard: {
     flexDirection: 'row',
