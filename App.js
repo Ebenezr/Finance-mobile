@@ -1,16 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  ScrollView,
-  FlatList,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Foundation from 'react-native-vector-icons/Foundation';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import MenuItems from './components/MenuItems';
+import TransactionCard from './components/TransactionCard';
+import NavBar from './components/NavBar';
+import InfoCard from './components/InfoCard';
+import BottomNav from './components/BottomNav';
+
 export default function App() {
   const transactions = [
     {
@@ -133,12 +127,11 @@ export default function App() {
       </View>
       <View style={styles.footer}>
         <View style={styles.transactions}>
-          {/* header */}
           <View style={styles.titleWrapper}>
             <Text style={styles.headerText}>Last Transaction</Text>
             <Text style={styles.subText}>See all</Text>
           </View>
-          {/* list */}
+
           <View style={styles.transactionList}>
             <FlatList
               keyExtractor={(item) => item.id}
@@ -153,7 +146,6 @@ export default function App() {
               )}
             />
           </View>
-          {/* bottom nav */}
         </View>
         <BottomNav />
       </View>
@@ -161,142 +153,7 @@ export default function App() {
   );
 }
 
-const BottomNav = () => {
-  return (
-    <View style={styles.bottomNav}>
-      <View style={styles.bottomNavMenus}>
-        <MaterialCommunityIcons
-          name='home-variant-outline'
-          size={24}
-          color='black'
-        />
-        <AntDesign name='creditcard' size={24} color='black' />
-      </View>
-      <View style={styles.bottomNavMenus}>
-        <AntDesign name='user' size={24} color='black' />
-        <AntDesign name='setting' size={24} color='black' />
-      </View>
-    </View>
-  );
-};
-const InfoCard = () => {
-  return (
-    <View style={styles.infoCard}>
-      <Text style={styles.h2}>Total Balance</Text>
-      <View style={styles.balanceCard}>
-        <Text style={styles.h1Disabled}>KES</Text>
-        <Text style={styles.h1}>145,000</Text>
-      </View>
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Choose card</Text>
-      </Pressable>
-    </View>
-  );
-};
-const NavBar = () => {
-  return (
-    <View style={styles.nav}>
-      <AntDesign
-        name='gitlab'
-        size={24}
-        color='green'
-        backgroundColor='#f8f8f8'
-        style={styles.avatar}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.userName}>Ebenezar Bukosia</Text>
-        <Text style={styles.greetings}>Good Afternoon Sir!</Text>
-      </View>
-      <Entypo name='dots-two-horizontal' size={24} color='white' />
-    </View>
-  );
-};
-
-const menus = [
-  {
-    icon: 'upload',
-    title: 'Transfer',
-  },
-  {
-    icon: 'check',
-    title: 'Receive',
-  },
-  {
-    icon: 'plussquareo',
-    title: 'Top Up',
-  },
-  {
-    icon: 'appstore-o',
-    title: 'More',
-  },
-];
-
-const MenuItems = () => {
-  return (
-    <View style={styles.menuItemsWrapper}>
-      {menus.map((item) => (
-        <View style={styles.menuItem}>
-          <AntDesign
-            name={item.icon}
-            size={30}
-            color='white'
-            backgroundColor='#303030'
-            style={styles.menuIcon}
-          />
-          <Text style={styles.subText}>{item.title}</Text>
-        </View>
-      ))}
-    </View>
-  );
-};
-
-const TransactionCard = ({ icon, companyName, date, amount }) => {
-  return (
-    <View style={styles.transactionCard}>
-      <FontAwesome
-        name={icon}
-        size={24}
-        color='green'
-        backgroundColor='#f8f8f8'
-        style={styles.icon}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.companyName}>{companyName}</Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
-      <Text style={styles.amount}>{amount}</Text>
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffff',
-    padding: 20,
-  },
-  bottomNavMenus: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 30,
-  },
-  menuItemsWrapper: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'space-between',
-    gap: 10,
-    paddingHorizontal: 30,
-  },
-  menuItem: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
   button: {
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -309,28 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-    lineHeight: 20,
-    letterSpacing: 0.25,
-    fontWeight: 'bold',
-  },
-  h1: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  h2: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'gray',
-  },
-  h1Disabled: {
-    fontSize: 35,
-    fontWeight: 'bold',
-    color: 'gray',
-  },
+
   container: {
     backgroundColor: '#f8f8f8',
     height: '100%',
@@ -346,26 +182,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: '45%',
   },
-  nav: {
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 35,
-  },
-  balanceCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    borderRadius: 10,
-    gap: 10,
-  },
-  infoCard: {
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   transactions: {
     paddingTop: 15,
     paddingHorizontal: 20,
@@ -387,35 +204,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: '70%',
   },
-  transactionCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#fff',
-  },
+
   icon: {
     width: 45,
     padding: 10,
     borderRadius: 10,
     marginRight: 10,
   },
-  menuIcon: {
-    width: 50,
-    height: 50,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  avatar: {
-    width: 45,
-    padding: 10,
-    borderRadius: 50,
-    margin: 10,
-  },
-  textContainer: {
-    flex: 1,
-  },
+
   companyName: {
     fontWeight: 'bold',
     color: '#333',
@@ -425,11 +221,7 @@ const styles = StyleSheet.create({
     color: '#ffff',
     fontSize: 20,
   },
-  greetings: {
-    color: '#f1f1f1',
-    fontSize: 15,
-    marginTop: 5,
-  },
+
   date: {
     color: '#666',
   },
