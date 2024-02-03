@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const MenuItems = () => {
@@ -25,13 +25,24 @@ const MenuItems = () => {
     <View style={styles.menuItemsWrapper}>
       {menus.map((item) => (
         <View style={styles.menuItem}>
-          <AntDesign
-            name={item.icon}
-            size={30}
-            color='white'
-            backgroundColor='#303030'
-            style={styles.menuIcon}
-          />
+          <Pressable
+            style={({ pressed }) => {
+              return [
+                {
+                  backgroundColor: pressed ? 'green' : '#303030',
+                  borderRadius: 10,
+                },
+              ];
+            }}
+          >
+            <AntDesign
+              name={item.icon}
+              size={30}
+              color='white'
+              backgroundColor='#303030'
+              style={styles.menuIcon}
+            />
+          </Pressable>
           <Text style={styles.subText}>{item.title}</Text>
         </View>
       ))}
@@ -63,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: '#303030',
+    // backgroundColor: '#303030',
   },
   subText: {
     color: 'gray',

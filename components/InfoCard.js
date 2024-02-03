@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 
 const InfoCard = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handlePress = () => {
+    setIsActive(!isActive);
+  };
   return (
     <View style={styles.infoCard}>
       <Text style={styles.h2}>Total Balance</Text>
@@ -8,7 +14,10 @@ const InfoCard = () => {
         <Text style={styles.h1Disabled}>KES</Text>
         <Text style={styles.h1}>145,000</Text>
       </View>
-      <Pressable style={styles.button}>
+      <Pressable
+        onPress={handlePress}
+        style={isActive ? styles.buttonActive : styles.button}
+      >
         <Text style={styles.buttonText}>Choose card</Text>
       </Pressable>
     </View>
@@ -50,6 +59,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: 'gray',
+    borderStyle: 'solid',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonActive: {
+    backgroundColor: 'green',
+    borderWidth: 1,
+    borderColor: 'green',
     borderStyle: 'solid',
     paddingVertical: 15,
     paddingHorizontal: 30,
